@@ -1,6 +1,7 @@
 package com.example.refill.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,6 +18,12 @@ interface RefillDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRefill(entry: RefillEntry)
+
+    /**
+     * Deletes a refill entry from the database.
+     */
+    @Delete
+    suspend fun deleteRefill(entry: RefillEntry)
 
     /**
      * Observes all refill entries recorded on or after the given [startOfDayTimestamp].

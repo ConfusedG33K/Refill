@@ -48,6 +48,15 @@ class RefillViewModel(private val repository: RefillRepository) : ViewModel() {
             repository.logRefill(type)
         }
     }
+
+    /**
+     * Deletes a refill entry.
+     */
+    fun deleteRefill(entry: RefillEntry) {
+        viewModelScope.launch {
+            repository.deleteRefill(entry)
+        }
+    }
 }
 
 /**

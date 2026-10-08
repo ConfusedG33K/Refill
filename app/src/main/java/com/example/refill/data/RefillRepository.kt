@@ -23,6 +23,15 @@ class RefillRepository(private val refillDao: RefillDao) {
     }
 
     /**
+     * Deletes a refill entry on IO thread.
+     */
+    suspend fun deleteRefill(entry: RefillEntry) {
+        withContext(Dispatchers.IO) {
+            refillDao.deleteRefill(entry)
+        }
+    }
+
+    /**
      * Returns a Flow observing today's refills given midnight's timestamp.
      */
     fun getTodayRefills(startOfDayTimestamp: Long): Flow<List<RefillEntry>> {
